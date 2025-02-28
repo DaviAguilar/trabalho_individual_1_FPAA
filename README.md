@@ -32,6 +32,8 @@ O repositório contém os seguintes arquivos:
 │── 📄 mainTest.py          # Teste do algoritmo 
 │── 📄 img.png              # Imagem do teste
 │── 📄 img_2.png            # Representação gráfica do algoritmo
+│── 📄 GraficoDeFluxo.png   # Grafico de fluxo
+│── 📄 GraficoDeFluxo.puml   # Código do grafico de fluxo
 
 ```
 
@@ -193,27 +195,97 @@ T(n) = \Theta(n^{\log_2(3)})
 Isso demonstra que, para valores suficientemente grandes de **n**, o algoritmo de Karatsuba realiza menos operações do que a multiplicação tradicional. No entanto, para valores pequenos de **n**, o custo adicional de somas e deslocamentos pode torná-lo mais lento do que a multiplicação direta.
 
 
+## Grafico de Fluxo
+<details about="Clique para ver o gráfico de fluxo"> 
+<summary><strong>Clique para ver Gráfico de Fluxo</strong></summary>
+   <h3>Gráfico de Fluxo</h3>
+   <img alt="GraficoDeFluxo.png" src="GraficoDeFluxo.png"/>
+</details>
+
+
+# Diagrama de Fluxo do Algoritmo de Karatsuba
+
+<details>
+<summary><strong>Clique para ver a explicação do grafico de fluxo</strong></summary>
+
+<h3>Fluxo Geral</h3>
+<ol>
+  <li><b>Início:</b> Executa <code>main()</code>.</li>
+  <li><b>Entrada:</b> Usuário insere <code>num1</code> e <code>num2</code>.</li>
+  <li><b>Cálculo:</b> Chama <code>karatsuba(num1, num2)</code> → <code>resultado_karatsuba</code>.</li>
+  <li><b>Verificação:</b> Calcula <code>num1 * num2</code> → <code>resultado_direto</code>.</li>
+  <li><b>Saída:</b> Exibe resultados e verifica se são iguais.</li>
+  <li><b>Fim:</b> Programa termina.</li>
+</ol>
+
+<h3>Função <code>karatsuba(x, y)</code></h3>
+<ol>
+  <li><b>Depuração:</b> Imprime <code>x</code> e <code>y</code>.</li>
+  <li><b>Caso Base:</b> Se <code>x < 10</code> ou <code>y < 10</code>, retorna <code>x * y</code>.</li>
+  <li><b>Pré-processamento:</b>
+    <ul>
+      <li>Converte para strings e iguala tamanhos com zeros.</li>
+      <li>Ajusta se tamanho for ímpar.</li>
+    </ul>
+  </li>
+  <li><b>Divisão:</b> Calcula <code>mid</code>, divide em <code>a, b, c, d</code>.</li>
+  <li><b>Recursão:</b>
+    <ul>
+      <li><code>ac = karatsuba(a, c)</code></li>
+      <li><code>bd = karatsuba(b, d)</code></li>
+      <li><code>ab_cd = karatsuba(a + b, c + d)</code></li>
+      <li><code>ad_bc = ab_cd - ac - bd</code></li>
+    </ul>
+  </li>
+  <li><b>Resultado:</b> Combina: <code>(ac * 10^max_length) + (ad_bc * 10^mid) + bd</code>.</li>
+  <li><b>Retorno:</b> Imprime e retorna o resultado.</li>
+</ol>
+
+<p><b>Visualização:</b> Veja o diagrama completo renderizando o código PlantUML (se incluído no repositório).</p>
+
+</details>
+
+
+## Teste
+<table>
+   <tr>
+        <td>
+            <img alt="img.png" src="img.png"/>
+         </td>
+   </tr>
+</table>
+
+
+— **Erro esperado na multiplição x=123, y=456**
+
+## Referências
+
+<div align="center">
+   <table>
+      <tr>
+         <td>
+            <a href="https://en.wikipedia.org/wiki/Karatsuba_algorithm">
+               Karatsuba algorithm
+               <br>
+               <img src="img_2.png" alt="Karatsuba algorithm" width="400" height="400">
+            </a>
+         </td>
+         <td>
+            <a href="https://www.geeksforgeeks.org/karatsuba-algorithm-in-python/">
+               Karatsuba algorithm in Python - GeeksforGeeks
+               <br>
+               <img src="https://media.geeksforgeeks.org/gfg-gg-logo.svg" alt="GeeksforGeeks logo" width="400" height="400">
+            </a>
+         </td>
+      </tr>
+   </table>
+</div>
+
+
 ## Versão do Python  
 
 Este projeto foi testado com **Python 3.10+**.  
 
-## Teste
-
-![img.png](img.png)
-
-— **Erro esperado na multiplição x=123, y=456**
-
-## Referência
-
-<div align="center">
-   <table colspan="11">
-      <a href="https://en.wikipedia.org/wiki/Karatsuba_algorithm">Karatsuba algorithm</a>
-   </table>
-    <td>
-      <img src="img_2.png" alt="Karatsuba algorithm" width="400" height="500">
-   </td>
-      
-</div>
 
 
 
