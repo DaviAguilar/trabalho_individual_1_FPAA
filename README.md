@@ -240,9 +240,6 @@ Isso demonstra que, para valores suficientemente grandes de **n**, o algoritmo d
   <li><b>Resultado:</b> Combina: <code>(ac * 10^max_length) + (ad_bc * 10^mid) + bd</code>.</li>
   <li><b>Retorno:</b> Imprime e retorna o resultado.</li>
 </ol>
-
-<p><b>Visualização:</b> Veja o diagrama completo renderizando o código PlantUML (se incluído no repositório).</p>
-
 </details>
 
 
