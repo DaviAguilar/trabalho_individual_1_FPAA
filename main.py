@@ -80,7 +80,11 @@ def main():
     print(f"Multiplicação de {num1} x {num2}:")
     print(f"Resultado com Karatsuba: {resultado_karatsuba}")
     print(f"Resultado direto (verificação): {resultado_direto}")
-    print(f"Correto? {resultado_karatsuba == resultado_direto}")
+    print(f"Correto?")
+    if resultado_karatsuba == resultado_direto:
+        print("Sim")
+    else:
+        print("Não")
 
 
 if __name__ == "__main__":
