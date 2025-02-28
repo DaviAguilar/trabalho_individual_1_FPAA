@@ -14,51 +14,40 @@ start
 
 fork
   :karatsuba(x, y);
-  :print "Karatsuba chamado com x, y";
-
-  if (x < 10 or y < 10) then (sim)
-    :print "Multiplicação direta";
+  if (x < 1000 or y < 1000) then (sim)
     :return x * y;
     -> fim da recursão;
   else (não)
-    :x_str = str(x);
-    :y_str = str(y);
-    :max_length = max(len(x_str), len(y_str));
-    :x_str = x_str.zfill(max_length);
-    :y_str = y_str.zfill(max_length);
-
-    if (max_length % 2 != 0) then (sim)
-      :x_str = "0" + x_str;
-      :y_str = "0" + y_str;
-      :max_length += 1;
+    :n = max(num_digits(x), num_digits(y));
+    if (n % 2 != 0) then (sim)
+      :n += 1;
     endif
 
-    :mid = max_length // 2;
-    :a = int(x_str[:mid]);
-    :b = int(x_str[mid:]);
-    :c = int(y_str[:mid]);
-    :d = int(y_str[mid:]);
-    :print "Divisão: x -> a, b; y -> c, d";
+    :half = n / 2;
+    :power = 10 ** half;
+    :a = x / power;
+    :b = x % power;
+    :c = y / power;
+    :d = y % power;
+    :print "Dividindo x e y em partes: a=a, b=b, c=c, d=d";
 
     :ac = karatsuba(a, c);
     :bd = karatsuba(b, d);
     :ab_cd = karatsuba(a + b, c + d);
     :ad_bc = ab_cd - ac - bd;
-    :print "Resultados intermediários";
+    :print "Resultados intermediários: ac=ac, bd=bd, ab_cd=ab_cd, ad_bc=ad_bc";
 
-    :result = (ac * 10 ** max_length) + (ad_bc * 10 ** mid) + bd;
-    :print "Resultado final";
+    :result = (ac * 10 ** n) + (ad_bc * 10 ** half) + bd;
     :return result;
   endif
 fork again
   :resultado_direto = num1 * num2;
 endfork
 
-:print "Multiplicação de num1 x num2";
+:print "Multiplicação de num1 x num2:";
 :print "Resultado com Karatsuba: resultado_karatsuba";
-:print "Resultado direto: resultado_direto";
+:print "Resultado direto (verificação): resultado_direto";
 :print "Correto?";
-
 if (resultado_karatsuba == resultado_direto) then (sim)
   :print "Sim";
 else (não)
