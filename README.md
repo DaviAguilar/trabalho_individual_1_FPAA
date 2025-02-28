@@ -157,7 +157,7 @@ O algoritmo é mais eficiente que a multiplicação ingênua (O(n²)), mas opera
 # Diagrama de Fluxo do Algoritmo de Karatsuba
 
 <details>
-<summary><strong>Clique para ver a explicação do grafico de fluxo</strong></summary>
+<summary><strong>Clique para ver a explicação do gráfico de fluxo</strong></summary>
 
 <h3>Fluxo Geral</h3>
 <ol>
@@ -171,15 +171,22 @@ O algoritmo é mais eficiente que a multiplicação ingênua (O(n²)), mas opera
 
 <h3>Função <code>karatsuba(x, y)</code></h3>
 <ol>
-  <li><b>Depuração:</b> Imprime <code>x</code> e <code>y</code>.</li>
-  <li><b>Caso Base:</b> Se <code>x < 10</code> ou <code>y < 10</code>, retorna <code>x * y</code>.</li>
+  <li><b>Caso Base:</b> Se <code>x < 1000</code> ou <code>y < 1000</code>, retorna <code>x * y</code>.</li>
   <li><b>Pré-processamento:</b>
     <ul>
-      <li>Converte para strings e iguala tamanhos com zeros.</li>
-      <li>Ajusta se tamanho for ímpar.</li>
+      <li>Calcula <code>n = max(num_digits(x), num_digits(y))</code>.</li>
+      <li>Se <code>n</code> for ímpar, incrementa <code>n += 1</code>.</li>
     </ul>
   </li>
-  <li><b>Divisão:</b> Calcula <code>mid</code>, divide em <code>a, b, c, d</code>.</li>
+  <li><b>Divisão:</b> Calcula <code>half = n / 2</code>, <code>power = 10^half</code>, divide em:
+    <ul>
+      <li><code>a = x / power</code></li>
+      <li><code>b = x % power</code></li>
+      <li><code>c = y / power</code></li>
+      <li><code>d = y % power</code></li>
+    </ul>
+  </li>
+  <li><b>Depuração:</b> Imprime <code>"Dividindo x e y em partes: a=a, b=b, c=c, d=d"</code>.</li>
   <li><b>Recursão:</b>
     <ul>
       <li><code>ac = karatsuba(a, c)</code></li>
@@ -188,8 +195,9 @@ O algoritmo é mais eficiente que a multiplicação ingênua (O(n²)), mas opera
       <li><code>ad_bc = ab_cd - ac - bd</code></li>
     </ul>
   </li>
-  <li><b>Resultado:</b> Combina: <code>(ac * 10^max_length) + (ad_bc * 10^mid) + bd</code>.</li>
-  <li><b>Retorno:</b> Imprime e retorna o resultado.</li>
+  <li><b>Depuração:</b> Imprime <code>"Resultados intermediários: ac=ac, bd=bd, ab_cd=ab_cd, ad_bc=ad_bc"</code>.</li>
+  <li><b>Resultado:</b> Combina: <code>(ac * 10^n) + (ad_bc * 10^half) + bd</code>.</li>
+  <li><b>Retorno:</b> Retorna o resultado.</li>
 </ol>
 </details>
 
@@ -236,5 +244,7 @@ Este projeto foi testado com **Python 3.10+**.
 
 
 
+## Estatísticas do Projeto
 
+[![wakatime](https://wakatime.com/badge/user/7beb7eb7-4987-4618-bc90-5459c6351da6/project/6f761fe6-7a41-47a7-8e52-1267faee5fd1.svg)](https://wakatime.com/badge/user/7beb7eb7-4987-4618-bc90-5459c6351da6/project/6f761fe6-7a41-47a7-8e52-1267faee5fd1?style=flat-square)
 
